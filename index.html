@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Estampa - Pedidos de Camisetas</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Scroll suave nativo via CSS para browsers modernos */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        .brand-blue { color: #1e293b; }
+        .brand-orange { color: #f97316; }
+        .bg-brand-blue { background-color: #1e293b; }
+        .bg-brand-orange { background-color: #f97316; }
+        
+        .uppercase-input {
+            text-transform: uppercase;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; opacity: 1; transform: translateY(0); }
+        }
+
+        .hidden { display: none; }
+
+        /* Ajuste para evitar saltos bruscos em browsers que não suportam scroll-behavior */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+        }
+
+        /* Estilo customizado do Botão WhatsApp Requisitado */
+        .btn-whatsapp-custom {
+            background-color: #25D366;
+            color: white;
+            font-weight: 700;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .btn-whatsapp-custom:hover {
+            background-color: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .btn-whatsapp-custom:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4 md:p-8">
+
+    <!-- Cabeçalho / Logótipo -->
+    <header class="w-full max-w-2xl text-center mb-8 fade-in relative">
+        <!-- Botão Admin Discreto -->
+        <button onclick="openAdminModal()" class="absolute -top-4 -right-4 p-2 text-gray-300 hover:text-orange-500 transition-colors" title="Configurações">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+            </svg>
+        </button>
+
+        <div class="flex justify-center mb-4">
+            <div class="relative inline-block">
+                <h1 class="text-4xl font-bold brand-blue italic" style="font-family: cursive;">Sua</h1>
+                <p class="text-2xl tracking-widest brand-orange font-bold -mt-2 uppercase">Estampa</p>
+            </div>
+        </div>
+        <h2 class="text-xl font-semibold text-gray-700">Formulário de Pedido Escolar</h2>
+        <p class="text-gray-500 text-sm mt-2">Reserve a sua t-shirt personalizada preenchendo os dados abaixo.</p>
+    </header>
+
+    <main class="w-full max-w-xl">
+        
+        <!-- ETAPA 1: FORMULÁRIO DE PEDIDO -->
+        <section id="step-form" class="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-gray-100 fade-in">
+            <form id="orderForm" class="space-y-5">
+                <div>
+                    <label for="parentName" class="block text-sm font-semibold text-gray-700 mb-1 text-left w-full">Nome do Responsável</label>
+                    <input type="text" id="parentName" required placeholder="RESPONSÁVEL PELO PEDIDO" 
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none uppercase-input">
+                </div>
+
+                <div>
+                    <label for="contact" class="block text-sm font-semibold text-gray-700 mb-1 text-left w-full">WhatsApp de Contacto</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                            </svg>
+                        </div>
+                        <input type="tel" id="contact" required placeholder="(00) 00000-0000" 
+                            title="Introduza um número de WhatsApp válido com DDD (ex: 12999999999)"
+                            pattern="(?:\(?\d{2}\)?\s?)?9?\d{4}-?\d{4}"
+                            maxlength="15"
+                            oninvalid="this.setCustomValidity('Por favor, insira um número de WhatsApp real com DDD (Ex: 12 99999-9999)')"
+                            oninput="this.setCustomValidity(''); maskPhone(this)"
+                            class="w-full pl-10 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none transition-all">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-4">
+                    <div class="md:col-span-2">
+                        <label for="childName" class="block text-sm font-semibold text-gray-700 mb-1 text-left w-full">Nome da Criança (Aluno)</label>
+                        <input type="text" id="childName" required placeholder="NOME COMPLETO DO ALUNO" 
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none uppercase-input">
+                    </div>
+                    
+                    <div>
+                        <label for="size" class="block text-sm font-semibold text-gray-700 mb-1 text-left w-full">Tamanho</label>
+                        <select id="size" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none bg-white">
+                            <option value="">Selecione...</option>
+                            <optgroup label="Infantil">
+                                <option value="10">Tam 10</option>
+                                <option value="12">Tam 12</option>
+                                <option value="14">Tam 14</option>
+                                <option value="16">Tam 16</option>
+                            </optgroup>
+                            <optgroup label="Adulto">
+                                <option value="P">P Adulto</option>
+                                <option value="M">M Adulto</option>
+                                <option value="G">G Adulto</option>
+                                <option value="GG">GG Adulto</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="grade" class="block text-sm font-semibold text-gray-700 mb-1 text-left w-full">Ano / Turma</label>
+                        <input type="text" id="grade" required placeholder="EX: 3º ANO A" 
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none uppercase-input">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="school" class="block text-sm font-semibold text-gray-700 mb-1 text-left w-full">Instituição de Ensino</label>
+                    <select id="school" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none bg-white uppercase-input">
+                        <option value="">Selecione a Escola...</option>
+                    </select>
+                </div>
+
+                <button type="submit" 
+                    class="w-full bg-brand-orange hover:bg-orange-600 text-white font-bold py-4 rounded-lg transition-all shadow-lg transform active:scale-95">
+                    PRÓXIMA ETAPA
+                </button>
+            </form>
+        </section>
+
+        <!-- ETAPA 2: TELA DE PAGAMENTO -->
+        <section id="step-payment" class="hidden fade-in bg-white rounded-2xl shadow-xl p-6 md:p-8 border-2 border-orange-500">
+            <div class="text-center">
+                <div class="mb-4 text-green-500 flex justify-center">
+                    <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold brand-blue mb-2">Quase lá!</h2>
+                <p class="text-gray-600 mb-6">Realize o pagamento via Pix para garantir a sua reserva.</p>
+                
+                <div class="bg-gray-50 rounded-xl p-4 mb-8 text-left border border-gray-100">
+                    <div class="flex justify-between items-start mb-2">
+                        <p class="text-[10px] text-gray-400 uppercase font-black tracking-widest">Resumo da Reserva</p>
+                        <p class="text-[10px] font-bold bg-orange-100 text-orange-700 px-2 py-0.5 rounded" id="idDisplay"></p>
+                    </div>
+                    <p class="font-bold text-slate-800 text-sm md:text-base" id="summaryDisplay"></p>
+                </div>
+
+                <!-- Interface de Cópia da Chave Pix -->
+                <div class="w-full max-sm mx-auto">
+                    <label class="block text-xs font-bold text-gray-400 uppercase mb-2 text-left">Chave Pix (CNPJ)</label>
+                    <div class="flex flex-col sm:flex-row items-center gap-2 mb-2">
+                        <input type="text" readonly value="62189694000104" id="pixKeyField"
+                            class="w-full bg-gray-50 border border-dashed border-gray-400 p-4 rounded-lg text-sm font-mono text-center focus:outline-none">
+                        <button onclick="copyPixToClipboard()" id="copyBtn" 
+                            class="w-full sm:w-auto bg-brand-blue text-white px-6 py-4 rounded-lg hover:opacity-90 font-bold transition-all flex items-center justify-center gap-2 min-w-[140px]">
+                            <span id="copyBtnText">Copiar Chave</span>
+                        </button>
+                    </div>
+                    <div class="text-left bg-blue-50 p-2 rounded border border-blue-100 mb-4">
+                        <p class="text-[10px] text-blue-400 uppercase font-bold">Destinatário:</p>
+                        <p class="text-xs font-bold text-blue-900 uppercase">62.189.694 ANA CLAUDIA LICA DE SOUSA</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4 mt-8">
+                    <button onclick="finishOrderWhatsApp()" class="btn-whatsapp-custom">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.94 3.659 1.437 5.634 1.437h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                        ENVIAR COMPROVATIVO VIA WHATSAPP
+                    </button>
+                    
+                    <button onclick="finalizeAttendant()" class="w-full bg-brand-blue text-white font-bold py-3 rounded-lg opacity-90 hover:opacity-100 transition-all">
+                        FINALIZAR ATENDIMENTO
+                    </button>
+
+                    <button onclick="resetPage()" class="w-full text-sm text-brand-orange font-bold hover:bg-orange-50 py-2 rounded transition-colors">
+                        FAZER OUTRO PEDIDO
+                    </button>
+                </div>
+
+                <div class="mt-8 p-4 bg-orange-50 rounded-lg text-left">
+                    <p class="text-xs text-orange-800 font-medium">⚠️ Importante: A confecção da peça será iniciada apenas após o envio do comprovativo.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TELA FINAL DE AGRADECIMENTO -->
+        <section id="step-thanks" class="hidden fade-in bg-white rounded-2xl shadow-xl p-10 border text-center">
+            <div class="mb-4 text-green-500 flex justify-center">
+                <svg class="w-20 h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <h2 class="text-3xl font-bold brand-blue mb-2">Pedido Registado!</h2>
+            <p class="text-gray-600 mb-8">A Sua Estampa Confecção agradece a preferência. Entraremos em contacto em breve se houver alguma dúvida.</p>
+            <button onclick="location.reload()" class="bg-brand-orange text-white px-8 py-3 rounded-lg font-bold hover:bg-orange-600 transition-all">
+                NOVO ATENDIMENTO
+            </button>
+        </section>
+
+    </main>
+
+    <!-- MODAL ADMINISTRATIVO -->
+    <div id="adminModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-gray-800">Gerir Escolas</h3>
+                <button onclick="closeAdminModal()" class="text-gray-400 hover:text-gray-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l18 18" />
+                    </svg>
+                </button>
+            </div>
+            
+            <div id="adminAuth">
+                <p class="text-sm text-gray-500 mb-4">Insira a palavra-passe para aceder às configurações.</p>
+                <input type="password" id="adminPassword" placeholder="Palavra-passe" class="w-full p-3 border rounded-lg mb-4">
+                <button onclick="checkAdminAuth()" class="w-full bg-brand-blue text-white font-bold py-2 rounded-lg">Entrar</button>
+            </div>
+
+            <div id="adminContent" class="hidden">
+                <div class="flex gap-2 mb-6">
+                    <input type="text" id="newSchoolName" placeholder="Novo nome da escola" class="flex-1 p-2 border rounded-lg uppercase-input text-sm">
+                    <button onclick="addSchool()" class="bg-green-500 text-white px-4 py-2 rounded-lg font-bold">ADICIONAR</button>
+                </div>
+                
+                <div class="max-h-60 overflow-y-auto border rounded-lg p-2 space-y-2" id="adminSchoolList"></div>
+                
+                <p class="mt-4 text-[10px] text-gray-400 italic">As alterações são guardadas localmente neste navegador.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="mt-12 text-center text-gray-400 text-sm">
+        <p>&copy; 2026 Sua Estampa Confecção. <br class="md:hidden"> Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        const sectionForm = document.getElementById('step-form');
+        const sectionPayment = document.getElementById('step-payment');
+        const sectionThanks = document.getElementById('step-thanks');
+        const orderForm = document.getElementById('orderForm');
+        const summaryDisplay = document.getElementById('summaryDisplay');
+        const idDisplay = document.getElementById('idDisplay');
+        const schoolSelect = document.getElementById('school');
+        
+        const adminModal = document.getElementById('adminModal');
+        const adminAuth = document.getElementById('adminAuth');
+        const adminContent = document.getElementById('adminContent');
+        const adminSchoolList = document.getElementById('adminSchoolList');
+
+        let currentOrderData = {};
+        
+        const defaultSchools = [
+            "ESCOLA MUNICIPAL EXEMPLO",
+            "COLÉGIO ESTADUAL PADRÃO",
+            "INSTITUTO DE EDUCAÇÃO ALFA",
+            "ESCOLA PRIMÁRIA DELTA",
+            "COLÉGIO OBJETIVO PLUS"
+        ];
+
+        let savedSchools = JSON.parse(localStorage.getItem('estampa_schools')) || defaultSchools;
+
+        function renderSchoolOptions() {
+            const currentValue = schoolSelect.value;
+            schoolSelect.innerHTML = '<option value="">Selecione a Escola...</option>';
+            const sortedSchools = [...savedSchools].sort();
+            sortedSchools.forEach(school => {
+                const opt = document.createElement('option');
+                opt.value = school;
+                opt.textContent = school;
+                schoolSelect.appendChild(opt);
+            });
+            schoolSelect.value = currentValue;
+        }
+
+        function openAdminModal() {
+            adminModal.classList.remove('hidden');
+            adminAuth.classList.remove('hidden');
+            adminContent.classList.add('hidden');
+            document.getElementById('adminPassword').value = '';
+        }
+
+        function closeAdminModal() {
+            adminModal.classList.add('hidden');
+        }
+
+        function checkAdminAuth() {
+            const pass = document.getElementById('adminPassword').value;
+            if (pass === 'admin123') {
+                adminAuth.classList.add('hidden');
+                adminContent.classList.remove('hidden');
+                renderAdminList();
+            } else {
+                alert("Palavra-passe incorreta.");
+            }
+        }
+
+        function renderAdminList() {
+            adminSchoolList.innerHTML = '';
+            savedSchools.forEach((school, index) => {
+                const item = document.createElement('div');
+                item.className = 'flex flex-col gap-2 p-3 bg-gray-50 rounded-lg border border-gray-100';
+                item.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <input type="text" value="${school}" id="edit-input-${index}" 
+                            class="flex-1 p-2 border rounded bg-white text-sm uppercase-input focus:ring-1 focus:ring-orange-500 outline-none">
+                        <div class="flex gap-1">
+                            <button onclick="updateSchool(${index})" class="p-2 text-blue-600 hover:bg-blue-50 rounded">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                    <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <button onclick="removeSchool(${index})" class="p-2 text-red-600 hover:bg-red-50 rounded">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                adminSchoolList.appendChild(item);
+            });
+        }
+
+        function addSchool() {
+            const input = document.getElementById('newSchoolName');
+            const name = input.value.trim().toUpperCase();
+            if (name && !savedSchools.includes(name)) {
+                savedSchools.push(name);
+                saveAndRefresh();
+                input.value = '';
+            } else if (savedSchools.includes(name)) {
+                alert("Esta escola já existe na lista.");
+            }
+        }
+
+        function updateSchool(index) {
+            const input = document.getElementById(`edit-input-${index}`);
+            const newName = input.value.trim().toUpperCase();
+            if (!newName) {
+                alert("O nome da escola não pode estar vazio.");
+                input.value = savedSchools[index];
+                return;
+            }
+            const isDuplicate = savedSchools.some((s, i) => s === newName && i !== index);
+            if (isDuplicate) {
+                alert("Já existe outra escola com este nome.");
+                input.value = savedSchools[index];
+                return;
+            }
+            savedSchools[index] = newName;
+            saveAndRefresh();
+        }
+
+        function removeSchool(index) {
+            if (confirm(`Deseja remover "${savedSchools[index]}" da lista?`)) {
+                savedSchools.splice(index, 1);
+                saveAndRefresh();
+            }
+        }
+
+        function saveAndRefresh() {
+            localStorage.setItem('estampa_schools', JSON.stringify(savedSchools));
+            renderAdminList();
+            renderSchoolOptions();
+        }
+
+        function maskPhone(input) {
+            let value = input.value.replace(/\D/g, "");
+            if (value.length > 11) value = value.slice(0, 11);
+            if (value.length > 10) {
+                value = value.replace(/^(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+            } else if (value.length > 6) {
+                value = value.replace(/^(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
+            } else if (value.length > 2) {
+                value = value.replace(/^(\d{2})(\d{0,5})/, "($1) $2");
+            } else if (value.length > 0) {
+                value = value.replace(/^(\d{0,2})/, "($1");
+            }
+            input.value = value;
+        }
+
+        function smoothScrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function generateOrderID() {
+            const date = new Date();
+            const timestamp = date.getFullYear().toString().substr(-2) + 
+                              (date.getMonth() + 1).toString().padStart(2, '0') + 
+                              date.getDate().toString().padStart(2, '0');
+            const random = Math.random().toString(36).substr(2, 4).toUpperCase();
+            return `PED-${timestamp}-${random}`;
+        }
+
+        orderForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            currentOrderData = {
+                id: generateOrderID(),
+                parent: document.getElementById('parentName').value.toUpperCase(),
+                contact: document.getElementById('contact').value,
+                child: document.getElementById('childName').value.toUpperCase(),
+                size: document.getElementById('size').value,
+                school: document.getElementById('school').value.toUpperCase(),
+                grade: document.getElementById('grade').value.toUpperCase()
+            };
+            idDisplay.innerText = currentOrderData.id;
+            summaryDisplay.innerHTML = `
+                RESPONSÁVEL: <span class="font-bold">${currentOrderData.parent}</span><br>
+                ALUNO: <span class="brand-orange">${currentOrderData.child}</span><br>
+                TAMANHO: ${currentOrderData.size} | TURMA: ${currentOrderData.grade}<br>
+                ESCOLA: ${currentOrderData.school}
+            `;
+            sectionForm.classList.add('hidden');
+            sectionPayment.classList.remove('hidden');
+            smoothScrollToTop();
+        });
+
+        function finishOrderWhatsApp() {
+            const phoneNumber = "5512987106510"; 
+            const customMessage = "Olá, segue o comprovante da reserva do uniforme.";
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(customMessage)}`;
+            window.open(url, '_blank');
+        }
+
+        function finalizeAttendant() {
+            sectionPayment.classList.add('hidden');
+            sectionThanks.classList.remove('hidden');
+            smoothScrollToTop();
+        }
+
+        async function copyPixToClipboard() {
+            const pixInput = document.getElementById("pixKeyField");
+            const btn = document.getElementById("copyBtn");
+            const btnText = document.getElementById("copyBtnText");
+            const textToCopy = pixInput.value.trim();
+
+            try {
+                await navigator.clipboard.writeText(textToCopy);
+                btnText.innerText = "Copiado!";
+                btn.classList.replace('bg-brand-blue', 'bg-green-600');
+                setTimeout(() => {
+                    btnText.innerText = "Copiar Chave";
+                    btn.classList.replace('bg-green-600', 'bg-brand-blue');
+                }, 2000);
+            } catch (err) {
+                const temp = document.createElement("textarea");
+                temp.value = textToCopy;
+                document.body.appendChild(temp);
+                temp.select();
+                document.execCommand("copy");
+                document.body.removeChild(temp);
+                btnText.innerText = "Copiado!";
+                setTimeout(() => btnText.innerText = "Copiar Chave", 2000);
+            }
+        }
+
+        function resetPage() {
+            orderForm.reset();
+            sectionPayment.classList.add('hidden');
+            sectionThanks.classList.add('hidden');
+            sectionForm.classList.remove('hidden');
+            smoothScrollToTop();
+        }
+
+        window.onload = renderSchoolOptions;
+    </script>
+</body>
+</html>
