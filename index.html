@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Estampa - Pedidos de Camisetas</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         /* Scroll suave nativo via CSS para browsers modernos */
@@ -85,7 +87,9 @@
 </head>
 <body class="min-h-screen flex flex-col items-center p-4 md:p-8">
 
+    <!-- Cabeçalho / Logótipo -->
     <header class="w-full max-w-2xl text-center mb-8 fade-in relative">
+        <!-- Botão Admin Discreto -->
         <button onclick="openAdminModal()" class="absolute -top-4 -right-4 p-2 text-gray-300 hover:text-orange-500 transition-colors" title="Configurações">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
@@ -104,6 +108,7 @@
 
     <main class="w-full max-w-xl">
         
+        <!-- ETAPA 1: FORMULÁRIO DE PEDIDO -->
         <section id="step-form" class="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-gray-100 fade-in">
             <form id="orderForm" class="space-y-5">
                 <div>
@@ -177,6 +182,7 @@
             </form>
         </section>
 
+        <!-- ETAPA 2: TELA DE PAGAMENTO -->
         <section id="step-payment" class="hidden fade-in bg-white rounded-2xl shadow-xl p-6 md:p-8 border-2 border-orange-500">
             <div class="text-center">
                 <div class="mb-4 text-green-500 flex justify-center">
@@ -187,14 +193,22 @@
                 <h2 class="text-2xl font-bold brand-blue mb-2">Quase lá!</h2>
                 <p class="text-gray-600 mb-6">Realize o pagamento via Pix para garantir a sua reserva.</p>
                 
-                <div class="bg-gray-50 rounded-xl p-4 mb-8 text-left border border-gray-100">
+                <div class="bg-gray-50 rounded-xl p-4 mb-4 text-left border border-gray-100">
                     <div class="flex justify-between items-start mb-2">
                         <p class="text-[10px] text-gray-400 uppercase font-black tracking-widest">Resumo da Reserva</p>
                         <p class="text-[10px] font-bold bg-orange-100 text-orange-700 px-2 py-0.5 rounded" id="idDisplay"></p>
                     </div>
                     <p class="font-bold text-slate-800 text-sm md:text-base" id="summaryDisplay"></p>
                 </div>
+                
+                <button onclick="editOrderData()" class="w-full mb-8 text-xs font-bold text-brand-orange hover:underline uppercase tracking-tight flex items-center justify-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                    Editar Dados
+                </button>
 
+                <!-- Interface de Cópia da Chave Pix -->
                 <div class="w-full max-sm mx-auto">
                     <label class="block text-xs font-bold text-gray-400 uppercase mb-2 text-left">Chave Pix (CNPJ)</label>
                     <div class="flex flex-col sm:flex-row items-center gap-2 mb-2">
@@ -234,6 +248,7 @@
             </div>
         </section>
 
+        <!-- TELA FINAL DE AGRADECIMENTO -->
         <section id="step-thanks" class="hidden fade-in bg-white rounded-2xl shadow-xl p-10 border text-center">
             <div class="mb-4 text-green-500 flex justify-center">
                 <svg class="w-20 h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -249,6 +264,7 @@
 
     </main>
 
+    <!-- MODAL ADMINISTRATIVO -->
     <div id="adminModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center p-4 z-50">
         <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl">
             <div class="flex justify-between items-center mb-6">
@@ -279,6 +295,16 @@
         </div>
     </div>
 
+    <!-- BOTÃO FLUTUANTE DO WHATSAPP -->
+    <a href="https://wa.me/5512987106510" target="_blank" id="floatingWhatsAppBtn" 
+       class="fixed bottom-6 right-6 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:bg-[#128C7E] hover:scale-105 transition-all z-50 flex items-center justify-center"
+       title="Fale connosco no WhatsApp">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.94 3.659 1.437 5.634 1.437h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        <span class="ml-2 font-bold">Dúvidas</span>
+    </a>
+
     <footer class="mt-12 text-center text-gray-400 text-sm">
         <p>&copy; 2026 Sua Estampa Confecção. <br class="md:hidden"> Todos os direitos reservados.</p>
     </footer>
@@ -301,6 +327,8 @@
         const adminAuth = document.getElementById('adminAuth');
         const adminContent = document.getElementById('adminContent');
         const adminSchoolList = document.getElementById('adminSchoolList');
+        
+        const floatingWhatsAppBtn = document.getElementById('floatingWhatsAppBtn');
 
         let currentOrderData = {};
         
@@ -449,12 +477,13 @@
         }
 
         // FUNÇÃO DE INTEGRAÇÃO COM GOOGLE SHEETS
-        async function sendToGoogleSheets(data) {
+        async function sendToGoogleSheets(data, isUpdate = false) {
             if (!SHEET_SCRIPT_URL) return true; 
 
             try {
                 const payload = {
                     ...data,
+                    action: isUpdate ? 'update' : 'create',
                     registro: new Date().toLocaleString('pt-BR')
                 };
 
@@ -480,8 +509,12 @@
             submitBtn.disabled = true;
             submitBtnText.innerHTML = '<div class="spinner"></div> ENVIANDO...';
             
+            // Lógica para não duplicar: identifica se já existe um ID (modo edição)
+            const isEditing = !!currentOrderData.id;
+            const orderID = isEditing ? currentOrderData.id : generateOrderID();
+
             currentOrderData = {
-                id: generateOrderID(),
+                id: orderID,
                 parent: document.getElementById('parentName').value.toUpperCase(),
                 contact: document.getElementById('contact').value,
                 child: document.getElementById('childName').value.toUpperCase(),
@@ -490,7 +523,8 @@
                 grade: document.getElementById('grade').value.toUpperCase()
             };
 
-            await sendToGoogleSheets(currentOrderData);
+            // Envia para o Sheets informando se deve criar ou atualizar (remover anterior)
+            await sendToGoogleSheets(currentOrderData, isEditing);
 
             idDisplay.innerText = currentOrderData.id;
             summaryDisplay.innerHTML = `
@@ -518,6 +552,7 @@
         function finalizeAttendant() {
             sectionPayment.classList.add('hidden');
             sectionThanks.classList.remove('hidden');
+            floatingWhatsAppBtn.classList.add('hidden'); // Oculta o botão flutuante na etapa final
             smoothScrollToTop();
         }
 
@@ -549,8 +584,17 @@
 
         function resetPage() {
             orderForm.reset();
+            currentOrderData = {}; // Limpa os dados do pedido atual para que o próximo gere um novo ID
             sectionPayment.classList.add('hidden');
             sectionThanks.classList.add('hidden');
+            sectionForm.classList.remove('hidden');
+            floatingWhatsAppBtn.classList.remove('hidden'); // Volta a exibir o botão flutuante
+            smoothScrollToTop();
+        }
+
+        // FUNÇÃO PARA EDITAR DADOS APÓS AVANÇAR
+        function editOrderData() {
+            sectionPayment.classList.add('hidden');
             sectionForm.classList.remove('hidden');
             smoothScrollToTop();
         }
