@@ -23,10 +23,10 @@
             --whatsapp: #25D366;
             --whatsapp-deep: #128C7E;
         }
-
+ 
         html { scroll-behavior: smooth; }
         @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-
+ 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--paper);
@@ -35,27 +35,27 @@
             background-size: 24px 24px;
             color: var(--ink);
         }
-
+ 
         .font-tag {
             font-family: 'Space Mono', monospace;
             letter-spacing: 0.06em;
         }
-
+ 
         .brand-ink { color: var(--ink); }
         .brand-accent { color: var(--accent); }
         .bg-ink { background-color: var(--ink); }
         .bg-accent { background-color: var(--accent); }
-
+ 
         .uppercase-input { text-transform: uppercase; }
-
+ 
         .fade-in { animation: fadeIn .45s cubic-bezier(.16,1,.3,1) forwards; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(14px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
+ 
         .hidden { display: none; }
-
+ 
         /* ---------- Cartão com "acabamento costurado" ---------- */
         .stitched-card {
             background: var(--card);
@@ -74,7 +74,7 @@
             opacity: .55;
         }
         .stitched-card > * { position: relative; z-index: 1; }
-
+ 
         /* ---------- Rótulos estilo etiqueta de roupa ---------- */
         .field-label {
             font-family: 'Space Mono', monospace;
@@ -86,7 +86,7 @@
             display: block;
             margin-bottom: 6px;
         }
-
+ 
         .field-input {
             width: 100%;
             padding: 0.85rem 1rem;
@@ -104,7 +104,7 @@
         .field-input:invalid:not(:placeholder-shown) {
             border-color: #ef4444;
         }
-
+ 
         /* ---------- Indicador "fita métrica" ---------- */
         .tape-stepper {
             position: relative;
@@ -165,7 +165,7 @@
             color: var(--ink);
             font-weight: 700;
         }
-
+ 
         /* ---------- Etiqueta de identificação do pedido ---------- */
         .order-tag {
             font-family: 'Space Mono', monospace;
@@ -178,7 +178,7 @@
             padding: 3px 9px;
             border-radius: 999px;
         }
-
+ 
         /* ---------- Botões ---------- */
         .btn-primary {
             background-color: var(--accent);
@@ -193,7 +193,7 @@
         }
         .btn-primary:hover { background-color: var(--accent-deep); transform: translateY(-1px); }
         .btn-primary:active { transform: scale(0.97); }
-
+ 
         .btn-ink {
             background-color: var(--ink);
             color: #fff;
@@ -204,7 +204,7 @@
             transition: all .2s ease;
         }
         .btn-ink:hover { opacity: .92; transform: translateY(-1px); }
-
+ 
         .btn-whatsapp-custom {
             background-color: var(--whatsapp);
             color: white;
@@ -218,7 +218,7 @@
         }
         .btn-whatsapp-custom:hover { background-color: var(--whatsapp-deep); transform: translateY(-1px); }
         .btn-whatsapp-custom:active { transform: scale(0.96); }
-
+ 
         .spinner {
             border: 3px solid rgba(255,255,255,0.3);
             border-radius: 50%;
@@ -227,7 +227,7 @@
             animation: spin 1s linear infinite;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
+ 
         /* Foco visível para acessibilidade */
         a:focus-visible, button:focus-visible {
             outline: 2px solid var(--accent);
@@ -236,7 +236,7 @@
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center p-4 md:p-8">
-
+ 
     <!-- Cabeçalho / Logótipo -->
     <header class="w-full max-w-2xl text-center mb-6 fade-in relative">
         <button onclick="openAdminModal()" class="absolute -top-3 -right-3 p-2 text-gray-300 hover:text-orange-500 transition-colors" title="Configurações" aria-label="Configurações">
@@ -244,7 +244,7 @@
                 <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
             </svg>
         </button>
-
+ 
         <div class="flex justify-center mb-3">
             <div class="relative inline-block text-left">
                 <p class="text-3xl italic font-semibold brand-ink" style="font-family:'Plus Jakarta Sans', sans-serif;">Sua</p>
@@ -254,7 +254,7 @@
         <h1 class="text-lg md:text-xl font-bold text-gray-700">Formulário de Pedido Escolar</h1>
         <p class="text-gray-500 text-sm mt-1">Reserve a camiseta personalizada preenchendo os dados abaixo.</p>
     </header>
-
+ 
     <!-- Indicador de progresso -->
     <div class="tape-stepper fade-in" aria-hidden="false">
         <div class="tape-line"></div>
@@ -265,9 +265,9 @@
             <div class="tape-stop" data-step="3"><span class="dot"></span><span class="stop-label">Confirmado</span></div>
         </div>
     </div>
-
+ 
     <main class="w-full max-w-xl">
-
+ 
         <!-- ETAPA 1: FORMULÁRIO DE PEDIDO -->
         <section id="step-form" class="stitched-card p-6 md:p-8 fade-in">
             <form id="orderForm" class="space-y-5">
@@ -277,7 +277,7 @@
                         autocomplete="name" maxlength="80"
                         class="field-input uppercase-input">
                 </div>
-
+ 
                 <div>
                     <label for="contact" class="field-label">WhatsApp de contato</label>
                     <div class="relative">
@@ -296,7 +296,7 @@
                             class="field-input pl-10">
                     </div>
                 </div>
-
+ 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-4" style="border-color: var(--stitch);">
                     <div class="md:col-span-2">
                         <label for="childName" class="field-label">Nome do aluno</label>
@@ -304,7 +304,7 @@
                             autocomplete="off" maxlength="80"
                             class="field-input uppercase-input">
                     </div>
-
+ 
                     <div>
                         <label for="size" class="field-label">Tamanho</label>
                         <select id="size" name="size" required class="field-input bg-white">
@@ -324,7 +324,7 @@
                             </optgroup>
                         </select>
                     </div>
-
+ 
                     <div>
                         <label for="grade" class="field-label">Ano / turma</label>
                         <input type="text" id="grade" name="grade" required placeholder="EX: 3º ANO A"
@@ -332,21 +332,21 @@
                             class="field-input uppercase-input">
                     </div>
                 </div>
-
+ 
                 <div>
                     <label for="school" class="field-label">Instituição de ensino</label>
                     <select id="school" name="school" required class="field-input bg-white uppercase-input">
                         <option value="">Selecione a escola...</option>
                     </select>
                 </div>
-
+ 
                 <button type="submit" id="submitBtn" class="btn-primary">
                     <span id="submitBtnText">Avançar para pagamento</span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
                 </button>
             </form>
         </section>
-
+ 
         <!-- ETAPA 2: TELA DE PAGAMENTO -->
         <section id="step-payment" class="hidden fade-in stitched-card p-6 md:p-8">
             <div class="text-center">
@@ -359,11 +359,11 @@
                 </div>
                 <h2 class="text-2xl font-bold brand-ink mb-1">Quase lá!</h2>
                 <p class="text-gray-500 mb-4 text-sm">Faça o pagamento via Pix para garantir a reserva.</p>
-
+ 
                 <div id="syncWarning" class="hidden text-left text-xs font-medium p-3 rounded-lg mb-4" style="background:#FEF3C7; color:#92400E; border:1px solid #FDE68A;" role="alert">
                     ⚠️ Não conseguimos confirmar o envio online dos seus dados agora (conexão instável). Não se preocupe: seu pedido foi salvo neste aparelho. Ao enviar o comprovante pelo WhatsApp, mencione o número do pedido abaixo para garantirmos o registro.
                 </div>
-
+ 
                 <div class="rounded-xl p-4 mb-4 text-left" style="background:#F7F9FB; border:1px dashed var(--stitch-strong);">
                     <div class="flex justify-between items-start mb-2">
                         <p class="text-[10px] text-gray-400 uppercase font-tag font-bold tracking-widest">Resumo da reserva</p>
@@ -371,14 +371,14 @@
                     </div>
                     <p class="font-semibold text-slate-800 text-sm md:text-base leading-relaxed" id="summaryDisplay"></p>
                 </div>
-
+ 
                 <button onclick="editOrderData()" class="w-full mb-8 text-xs font-bold brand-accent hover:underline uppercase tracking-tight flex items-center justify-center gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                     </svg>
                     Editar dados
                 </button>
-
+ 
                 <div class="w-full max-sm mx-auto">
                     <label class="field-label text-left">Chave Pix (CNPJ)</label>
                     <div class="flex flex-col sm:flex-row items-center gap-2 mb-2">
@@ -393,7 +393,7 @@
                         <p class="text-xs font-bold text-blue-900 uppercase">62.189.694 ANA CLAUDIA LICA DE SOUSA</p>
                     </div>
                 </div>
-
+ 
                 <div class="space-y-3 mt-8">
                     <button onclick="finishOrderWhatsApp()" class="btn-whatsapp-custom">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -401,22 +401,22 @@
                         </svg>
                         Enviar comprovante pelo WhatsApp
                     </button>
-
+ 
                     <button onclick="finalizeAttendant()" class="btn-ink">
                         Concluir atendimento
                     </button>
-
+ 
                     <button onclick="resetPage()" class="w-full text-sm font-bold brand-accent hover:bg-orange-50 py-2 rounded transition-colors">
                         Fazer outro pedido
                     </button>
                 </div>
-
+ 
                 <div class="mt-8 p-4 rounded-lg text-left" style="background:#FFF1E6;">
                     <p class="text-xs font-medium" style="color:#9A3412;">⚠️ A confecção da peça começa apenas após o envio do comprovante.</p>
                 </div>
             </div>
         </section>
-
+ 
         <!-- TELA FINAL DE AGRADECIMENTO -->
         <section id="step-thanks" class="hidden fade-in stitched-card p-10 text-center">
             <div class="mb-4 flex justify-center">
@@ -432,9 +432,9 @@
                 Novo atendimento
             </button>
         </section>
-
+ 
     </main>
-
+ 
     <!-- MODAL ADMINISTRATIVO -->
     <div id="adminModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center p-4 z-50">
         <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl">
@@ -446,23 +446,24 @@
                     </svg>
                 </button>
             </div>
-
+ 
             <div id="adminAuth">
-                <p class="text-sm text-gray-500 mb-4">Insira a senha para acessar as configurações.</p>
-                <input type="password" id="adminPassword" placeholder="Senha" class="field-input mb-4">
+                <p class="text-sm text-gray-500 mb-4">Entre com seu usuário e senha para acessar as configurações.</p>
+                <input type="text" id="adminUsername" placeholder="Usuário" autocomplete="username" class="field-input mb-3">
+                <input type="password" id="adminPassword" placeholder="Senha" autocomplete="current-password" class="field-input mb-4">
                 <button onclick="checkAdminAuth()" id="adminAuthBtn" class="btn-ink">Entrar</button>
             </div>
-
+ 
             <div id="adminContent" class="hidden">
                 <div class="flex gap-2 mb-6">
                     <input type="text" id="newSchoolName" placeholder="Nome da nova escola" class="field-input uppercase-input text-sm">
                     <button onclick="addSchool()" class="text-white px-4 rounded-lg font-bold" style="background: var(--success);">Adicionar</button>
                 </div>
-
+ 
                 <div class="max-h-60 overflow-y-auto border rounded-lg p-2 space-y-2" id="adminSchoolList" style="border-color: var(--stitch);"></div>
-
+ 
                 <p class="mt-4 text-[10px] text-gray-400 italic">As alterações são salvas localmente neste navegador.</p>
-
+ 
                 <div class="mt-5 pt-4" style="border-top:1px dashed var(--stitch-strong);">
                     <p class="field-label mb-2">Backup local de pedidos</p>
                     <p class="text-xs text-gray-500 mb-3" id="backupCount">Carregando...</p>
@@ -473,7 +474,7 @@
             </div>
         </div>
     </div>
-
+ 
     <!-- BOTÃO FLUTUANTE DO WHATSAPP -->
     <a href="https://wa.me/5512987106510" target="_blank" id="floatingWhatsAppBtn"
        class="fixed bottom-6 right-6 text-white p-4 rounded-full shadow-lg hover:scale-105 transition-all z-50 flex items-center justify-center"
@@ -484,15 +485,15 @@
         </svg>
         <span class="ml-2 font-bold">Dúvidas</span>
     </a>
-
+ 
     <footer class="mt-12 text-center text-gray-400 text-xs font-tag">
         <p>&copy; 2026 SUA ESTAMPA CONFECÇÃO — TODOS OS DIREITOS RESERVADOS</p>
     </footer>
-
+ 
     <script>
         // CONFIGURAÇÃO DA PLANILHA GOOGLE
-        const SHEET_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyoq2twKEsSisHiXkRsj-rDtGfACLFaSkLFApOe7VjqBr80PxWVtq67TScZXEf6EKzZ/exec";
-
+        const SHEET_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzNUM9Y8_dp4DKMoeH85HZutiIRpJqlQya9Ggo3cOIZdF0e-A8n7y-A6MtuYpoIWYPt/exec";
+ 
         const sectionForm = document.getElementById('step-form');
         const sectionPayment = document.getElementById('step-payment');
         const sectionThanks = document.getElementById('step-thanks');
@@ -502,17 +503,17 @@
         const schoolSelect = document.getElementById('school');
         const submitBtn = document.getElementById('submitBtn');
         const submitBtnText = document.getElementById('submitBtnText');
-
+ 
         const adminModal = document.getElementById('adminModal');
         const adminAuth = document.getElementById('adminAuth');
         const adminContent = document.getElementById('adminContent');
         const adminSchoolList = document.getElementById('adminSchoolList');
-
+ 
         const floatingWhatsAppBtn = document.getElementById('floatingWhatsAppBtn');
         const tapeProgress = document.getElementById('tapeProgress');
-
+ 
         let currentOrderData = {};
-
+ 
         const defaultSchools = [
             "EMEFI Júlia Bernardes Rodrigues",
             "EMEFI Luiza Maria Cavalcanti Guratti",
@@ -521,9 +522,9 @@
             "MALBA THEREZA FERRAZ CAMPANER",
             "EMEFI ELIZABETE DE PAULA HONORATO",
         ];
-
+ 
         let savedSchools = JSON.parse(localStorage.getItem('estampa_schools')) || defaultSchools;
-
+ 
         // ---------- Indicador de progresso (fita métrica) ----------
         function setTapeStep(step) {
             const widths = { 1: '0%', 2: '50%', 3: '100%' };
@@ -535,7 +536,7 @@
                 if (s === step) el.classList.add('active');
             });
         }
-
+ 
         function renderSchoolOptions() {
             const currentValue = schoolSelect.value;
             schoolSelect.innerHTML = '<option value="">Selecione a escola...</option>';
@@ -548,108 +549,126 @@
             });
             schoolSelect.value = currentValue;
         }
-
+ 
         function openAdminModal() {
             adminModal.classList.remove('hidden');
             adminAuth.classList.remove('hidden');
             adminContent.classList.add('hidden');
+            document.getElementById('adminUsername').value = '';
             document.getElementById('adminPassword').value = '';
-            setTimeout(() => document.getElementById('adminPassword').focus(), 50);
+            setTimeout(() => document.getElementById('adminUsername').focus(), 50);
         }
-
+ 
         function closeAdminModal() {
             adminModal.classList.add('hidden');
         }
-
+ 
         // Fecha o modal ao clicar fora da caixa de conteúdo
         adminModal.addEventListener('click', (e) => {
             if (e.target === adminModal) closeAdminModal();
         });
-
+ 
         // Fecha o modal com a tecla Esc
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && !adminModal.classList.contains('hidden')) {
                 closeAdminModal();
             }
         });
-
-        // Permite confirmar a senha com Enter
+ 
+        // Enter no campo de usuário move o foco para a senha.
+        document.getElementById('adminUsername').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('adminPassword').focus();
+            }
+        });
+ 
+        // Enter no campo de senha confirma o login.
         document.getElementById('adminPassword').addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 checkAdminAuth();
             }
         });
-
-        // Verifica a senha do admin via JSONP: o Apps Script devolve um
-        // <script> que chama nossa função de callback diretamente. Isso
+ 
+        // Verifica usuário + senha do admin via JSONP: o Apps Script devolve
+        // um <script> que chama nossa função de callback diretamente. Isso
         // evita por completo o problema de redirecionamento/CORS do
         // Apps Script que atrapalha o fetch() normal.
-        function checkAdminPasswordJSONP(password) {
+        function checkAdminLoginJSONP(usuario, senha) {
             return new Promise((resolve, reject) => {
                 const callbackName = 'adminAuthCallback_' + Date.now();
                 const script = document.createElement('script');
                 let timeoutId;
-
+ 
                 const cleanup = () => {
                     clearTimeout(timeoutId);
                     delete window[callbackName];
                     script.remove();
                 };
-
+ 
                 window[callbackName] = (result) => {
                     cleanup();
                     resolve(result);
                 };
-
+ 
                 script.onerror = () => {
                     cleanup();
                     reject(new Error('Falha ao carregar resposta do servidor.'));
                 };
-
+ 
                 timeoutId = setTimeout(() => {
                     cleanup();
-                    reject(new Error('Tempo esgotado ao verificar a senha.'));
+                    reject(new Error('Tempo esgotado ao verificar o login.'));
                 }, 10000);
-
-                script.src = `${SHEET_SCRIPT_URL}?action=checkAdminPassword&password=${encodeURIComponent(password)}&callback=${callbackName}`;
+ 
+                const params = new URLSearchParams({
+                    action: 'checkAdminLogin',
+                    usuario: usuario,
+                    senha: senha,
+                    callback: callbackName
+                });
+                script.src = `${SHEET_SCRIPT_URL}?${params.toString()}`;
                 document.body.appendChild(script);
             });
         }
-
+ 
         async function checkAdminAuth() {
+            const userInput = document.getElementById('adminUsername');
             const passInput = document.getElementById('adminPassword');
             const authBtn = document.getElementById('adminAuthBtn');
-            const pass = passInput.value;
-
-            if (!pass) {
-                alert('Digite a senha.');
+            const usuario = userInput.value.trim();
+            const senha = passInput.value;
+ 
+            if (!usuario || !senha) {
+                alert('Digite usuário e senha.');
                 return;
             }
-
+ 
             authBtn.disabled = true;
             const originalLabel = authBtn.textContent;
             authBtn.textContent = 'Verificando...';
-
+ 
             try {
-                const result = await checkAdminPasswordJSONP(pass);
-
+                const result = await checkAdminLoginJSONP(usuario, senha);
+ 
                 if (result.ok) {
+                    passInput.value = '';
                     adminAuth.classList.add('hidden');
                     adminContent.classList.remove('hidden');
                     renderAdminList();
                 } else {
-                    alert('Senha incorreta.');
+                    alert(result.error || 'Usuário ou senha incorretos.');
                 }
             } catch (err) {
-                console.error('Erro ao verificar senha do admin:', err);
-                alert('Não foi possível verificar a senha agora. Confira sua conexão e tente novamente.');
+                console.error('Erro ao verificar login do admin:', err);
+                alert('Não foi possível verificar o login agora. Confira sua conexão e tente novamente.');
             } finally {
                 authBtn.disabled = false;
                 authBtn.textContent = originalLabel;
             }
         }
-
+ 
         function updateBackupCount() {
             const el = document.getElementById('backupCount');
             if (!el) return;
@@ -659,7 +678,7 @@
                 ? `${backup.length} pedido(s) salvo(s) neste aparelho — ${pendentes} sem confirmação de envio online.`
                 : `${backup.length} pedido(s) salvo(s) neste aparelho.`;
         }
-
+ 
         function downloadOrderBackup() {
             const backup = JSON.parse(localStorage.getItem('estampa_backup_pedidos')) || [];
             if (backup.length === 0) {
@@ -676,7 +695,7 @@
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         }
-
+ 
         function renderAdminList() {
             updateBackupCount();
             adminSchoolList.innerHTML = '';
@@ -705,7 +724,7 @@
                 adminSchoolList.appendChild(item);
             });
         }
-
+ 
         function addSchool() {
             const input = document.getElementById('newSchoolName');
             const name = input.value.trim().toUpperCase();
@@ -717,7 +736,7 @@
                 alert("Esta escola já existe na lista.");
             }
         }
-
+ 
         function updateSchool(index) {
             const input = document.getElementById(`edit-input-${index}`);
             const newName = input.value.trim().toUpperCase();
@@ -735,20 +754,20 @@
             savedSchools[index] = newName;
             saveAndRefresh();
         }
-
+ 
         function removeSchool(index) {
             if (confirm(`Deseja remover "${savedSchools[index]}" da lista?`)) {
                 savedSchools.splice(index, 1);
                 saveAndRefresh();
             }
         }
-
+ 
         function saveAndRefresh() {
             localStorage.setItem('estampa_schools', JSON.stringify(savedSchools));
             renderAdminList();
             renderSchoolOptions();
         }
-
+ 
         function maskPhone(input) {
             let value = input.value.replace(/\D/g, "");
             if (value.length > 11) value = value.slice(0, 11);
@@ -763,11 +782,11 @@
             }
             input.value = value;
         }
-
+ 
         function smoothScrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
+ 
         function generateOrderID() {
             const date = new Date();
             const timestamp = date.getFullYear().toString().slice(-2) +
@@ -776,7 +795,7 @@
             const random = Math.random().toString(36).slice(2, 6).toUpperCase();
             return `PED-${timestamp}-${random}`;
         }
-
+ 
         // Evita que dados digitados pelo usuário sejam interpretados como HTML
         // ao serem inseridos com innerHTML (proteção contra XSS).
         function escapeHTML(str) {
@@ -784,7 +803,7 @@
                 '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
             }[c]));
         }
-
+ 
         // FUNÇÃO DE INTEGRAÇÃO COM GOOGLE SHEETS
         // Usamos "no-cors" porque o Apps Script redireciona sua resposta
         // internamente, o que impede o navegador de ler o corpo da resposta
@@ -794,17 +813,17 @@
         // a resposta ou não.
         async function sendToGoogleSheets(data, isUpdate = false) {
             if (!SHEET_SCRIPT_URL) return { ok: true };
-
+ 
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s
-
+ 
             try {
                 const payload = {
                     ...data,
                     action: isUpdate ? 'update' : 'create',
                     registro: new Date().toLocaleString('pt-BR')
                 };
-
+ 
                 await fetch(SHEET_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
@@ -823,7 +842,7 @@
                 clearTimeout(timeoutId);
             }
         }
-
+ 
         // Guarda uma cópia local de todo pedido (mesmo que o envio à planilha
         // falhe), para que nenhum pedido seja perdido silenciosamente.
         function saveOrderBackupLocally(data, sentOk) {
@@ -835,26 +854,26 @@
                 console.error('Não foi possível salvar backup local do pedido:', err);
             }
         }
-
+ 
         orderForm.addEventListener('submit', async function (e) {
             e.preventDefault();
-
+ 
             const parentVal = document.getElementById('parentName').value.trim();
             const childVal = document.getElementById('childName').value.trim();
             const gradeVal = document.getElementById('grade').value.trim();
-
+ 
             // Impede que espaços em branco passem pela validação "required" nativa
             if (!parentVal || !childVal || !gradeVal) {
                 alert('Por favor, preencha todos os campos de texto (eles não podem conter apenas espaços).');
                 return;
             }
-
+ 
             submitBtn.disabled = true;
             submitBtnText.innerHTML = '<div class="spinner"></div> Enviando...';
-
+ 
             const isEditing = !!currentOrderData.id;
             const orderID = isEditing ? currentOrderData.id : generateOrderID();
-
+ 
             currentOrderData = {
                 id: orderID,
                 parent: parentVal.toUpperCase(),
@@ -864,10 +883,10 @@
                 school: document.getElementById('school').value.toUpperCase(),
                 grade: gradeVal.toUpperCase()
             };
-
+ 
             const result = await sendToGoogleSheets(currentOrderData, isEditing);
             saveOrderBackupLocally(currentOrderData, result.ok);
-
+ 
             idDisplay.innerText = currentOrderData.id;
             summaryDisplay.innerHTML = `
                 Responsável: <span class="font-bold">${escapeHTML(currentOrderData.parent)}</span><br>
@@ -875,26 +894,26 @@
                 Tamanho: ${escapeHTML(currentOrderData.size)} &nbsp;|&nbsp; Turma: ${escapeHTML(currentOrderData.grade)}<br>
                 Escola: ${escapeHTML(currentOrderData.school)}
             `;
-
+ 
             submitBtn.disabled = false;
             submitBtnText.innerText = 'Avançar para pagamento';
-
+ 
             const syncWarning = document.getElementById('syncWarning');
             syncWarning.classList.toggle('hidden', result.ok);
-
+ 
             sectionForm.classList.add('hidden');
             sectionPayment.classList.remove('hidden');
             setTapeStep(2);
             smoothScrollToTop();
         });
-
+ 
         function finishOrderWhatsApp() {
             const phoneNumber = "5512987106510";
             const customMessage = "Olá, segue o comprovante da reserva do uniforme.";
             const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(customMessage)}`;
             window.open(url, '_blank');
         }
-
+ 
         function finalizeAttendant() {
             sectionPayment.classList.add('hidden');
             sectionThanks.classList.remove('hidden');
@@ -902,12 +921,12 @@
             setTapeStep(3);
             smoothScrollToTop();
         }
-
+ 
         async function copyPixToClipboard() {
             const pixInput = document.getElementById("pixKeyField");
             const btnText = document.getElementById("copyBtnText");
             const textToCopy = pixInput.value.trim();
-
+ 
             try {
                 await navigator.clipboard.writeText(textToCopy);
                 btnText.innerText = "Copiado!";
@@ -923,7 +942,7 @@
                 setTimeout(() => btnText.innerText = "Copiar chave Pix", 2000);
             }
         }
-
+ 
         function resetPage() {
             orderForm.reset();
             currentOrderData = {};
@@ -934,14 +953,14 @@
             setTapeStep(1);
             smoothScrollToTop();
         }
-
+ 
         function editOrderData() {
             sectionPayment.classList.add('hidden');
             sectionForm.classList.remove('hidden');
             setTapeStep(1);
             smoothScrollToTop();
         }
-
+ 
         window.onload = function () {
             renderSchoolOptions();
             setTapeStep(1);
@@ -949,3 +968,4 @@
     </script>
 </body>
 </html>
+ 
