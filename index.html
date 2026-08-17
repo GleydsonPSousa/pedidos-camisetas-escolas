@@ -895,8 +895,7 @@
             submitBtn.disabled = false;
             submitBtnText.innerText = 'Avançar para pagamento';
  
-            const syncWarning = document.getElementById('syncWarning');
-            syncWarning.classList.toggle('hidden', result.ok);
+            // AS LINHAS QUE CAUSAVAM O ERRO FORAM REMOVIDAS DAQUI
  
             sectionForm.classList.add('hidden');
             sectionPayment.classList.remove('hidden');
@@ -965,4 +964,3 @@
     </script>
 </body>
 </html>
- 
